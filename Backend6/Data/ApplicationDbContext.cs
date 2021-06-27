@@ -16,20 +16,9 @@ namespace Rationality.Data
         {
         }
 
-        public DbSet<PostCategory> PostCategories { get; set; }
-
-        public DbSet<Post> Posts { get; set; }
-
-        public DbSet<PostComment> PostComments { get; set; }
-
-        public DbSet<PostAttachment> PostAttachments { get; set; }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            builder.Entity<Post>().HasOne(x => x.Creator).WithMany().OnDelete(DeleteBehavior.Restrict);
-            builder.Entity<PostComment>().HasOne(x => x.Creator).WithMany().OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

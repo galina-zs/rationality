@@ -63,11 +63,11 @@ namespace Rationality
                 routes.MapRoute(
                     name: "forum",
                     template: "Forum",
-                    defaults: new { controller = "ForumCategories", action = "Index" });
+                    defaults: new { controller = "Mockups", action = "Index" });
 
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Posts}/{action=Index}/{id?}");
+                    template: "{controller=Mockups}/{action=Index}/{id?}");
             });
         }
     }

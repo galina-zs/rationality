@@ -5,8 +5,8 @@ namespace Rationality.Services
 {
     public interface IUserPermissionsService
     {
-        Boolean CanEditPost(Post post);
+        //Boolean CanEditPost(Post post);
 
-        Boolean CanEditPostComment(PostComment postComment);
+        //Boolean CanEditPostComment(PostComment postComment);
     }
 }

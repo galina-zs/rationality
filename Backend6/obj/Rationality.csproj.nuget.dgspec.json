@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Вадим\\Source\\Repos\\rationality\\Backend6\\Rationality.csproj": {}
+    "C:\\Users\\Вадим\\source\\repos\\rationality\\Backend6\\Rationality.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Вадим\\Source\\Repos\\rationality\\Backend6\\Rationality.csproj": {
+    "C:\\Users\\Вадим\\source\\repos\\rationality\\Backend6\\Rationality.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Вадим\\Source\\Repos\\rationality\\Backend6\\Rationality.csproj",
+        "projectUniqueName": "C:\\Users\\Вадим\\source\\repos\\rationality\\Backend6\\Rationality.csproj",
         "projectName": "Rationality",
-        "projectPath": "C:\\Users\\Вадим\\Source\\Repos\\rationality\\Backend6\\Rationality.csproj",
+        "projectPath": "C:\\Users\\Вадим\\source\\repos\\rationality\\Backend6\\Rationality.csproj",
         "packagesPath": "C:\\Users\\Вадим\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Вадим\\Source\\Repos\\rationality\\Backend6\\obj\\",
+        "outputPath": "C:\\Users\\Вадим\\source\\repos\\rationality\\Backend6\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Вадим\\AppData\\Roaming\\NuGet\\NuGet.Config",

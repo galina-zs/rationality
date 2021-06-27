@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8cbPo/LrvS1mGRI66wQn07SKKdU5/MjUctZIwJkoV0NLWRLeX6twGS7mfqyxpLTc7/AKEgEyoP9L7GCCYmUOLg==",
+  "dgSpecHash": "vb3P5HtOP9BBPy2pScDi4Tsxl60R6L2XLMb3S6cwpcUAyLW9/xcO6ia+k+9p/F7yYhKgIy4O+2qAVH6vigMTIA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Вадим\\Source\\Repos\\rationality\\Backend6\\Rationality.csproj",
+  "projectFilePath": "C:\\Users\\Вадим\\source\\repos\\rationality\\Backend6\\Rationality.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Вадим\\.nuget\\packages\\libuv\\1.10.0\\libuv.1.10.0.nupkg.sha512",
     "C:\\Users\\Вадим\\.nuget\\packages\\microsoft.applicationinsights\\2.4.0\\microsoft.applicationinsights.2.4.0.nupkg.sha512",
