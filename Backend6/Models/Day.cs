@@ -9,6 +9,8 @@ namespace Rationality.Models
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
+        public int ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
         public int SnackId { get; set; }
         public Snack Snack { get; set; }
         public int BreakfastId { get; set; }

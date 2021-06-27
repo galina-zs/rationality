@@ -15,6 +15,8 @@ namespace Rationality.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ApplicationUserId = table.Column<int>(nullable: false),
+                    ApplicationUserId1 = table.Column<string>(nullable: true),
                     BreakfastId = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     DinnerId = table.Column<int>(nullable: false),
@@ -24,6 +26,12 @@ namespace Rationality.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Days", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Days_AspNetUsers_ApplicationUserId1",
+                        column: x => x.ApplicationUserId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Days_Recipes_BreakfastId",
                         column: x => x.BreakfastId,
@@ -49,6 +57,11 @@ namespace Rationality.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Days_ApplicationUserId1",
+                table: "Days",
+                column: "ApplicationUserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Days_BreakfastId",
