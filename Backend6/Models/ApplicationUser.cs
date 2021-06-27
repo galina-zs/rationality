@@ -16,6 +16,7 @@ namespace Rationality.Models
         public PhysicalActivity Activity { get; set; }
         public int MoneyPerMonth { get; set; }
         public int Height { get; set; }
+        public ICollection<Day> Days { get; set; }
     }
 }
 
