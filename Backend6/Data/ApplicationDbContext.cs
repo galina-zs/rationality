@@ -16,9 +16,18 @@ namespace Rationality.Data
         {
         }
 
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductSnack> ProductSnacks { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<RecipeProduct> RecipeProducts { get; set; }
+        public DbSet<Snack> Snacks { get; set; }
+        public DbSet<Day> Days { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<RecipeProduct>()
+                .HasKey(x => new { x.RecipeId, x.ProductId });
         }
     }
 }
