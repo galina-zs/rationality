@@ -12,7 +12,7 @@ using System;
 namespace Rationality.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210627152227_AddDays")]
+    [Migration("20210627154955_AddDays")]
     partial class AddDays
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -378,22 +378,22 @@ namespace Rationality.Migrations
                     b.HasOne("Rationality.Models.Recipe", "Breakfast")
                         .WithMany()
                         .HasForeignKey("BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Rationality.Models.Recipe", "Dinner")
                         .WithMany()
                         .HasForeignKey("DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Rationality.Models.Recipe", "Lunch")
                         .WithMany()
                         .HasForeignKey("LunchId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Rationality.Models.Snack", "Snack")
                         .WithMany()
                         .HasForeignKey("SnackId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Rationality.Models.ProductSnack", b =>

@@ -29,25 +29,25 @@ namespace Rationality.Migrations
                         column: x => x.BreakfastId,
                         principalTable: "Recipes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Days_Recipes_DinnerId",
                         column: x => x.DinnerId,
                         principalTable: "Recipes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Days_Recipes_LunchId",
                         column: x => x.LunchId,
                         principalTable: "Recipes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Days_Snacks_SnackId",
                         column: x => x.SnackId,
                         principalTable: "Snacks",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
