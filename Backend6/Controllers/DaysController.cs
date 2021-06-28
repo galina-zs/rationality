@@ -35,7 +35,9 @@ namespace Rationality.Controllers
                 .Include(d => d.Dinner)
                 .Include(d => d.Lunch)
                 .Include(d => d.Snack)
+                .OrderBy(p => p.Date)
                 .SingleOrDefaultAsync(m => m.ApplicationUserId.ToString() == user.Id);
+            
             return View(await items);
         }
 
