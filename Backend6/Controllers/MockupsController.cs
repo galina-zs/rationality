@@ -27,5 +27,45 @@ namespace Rationality.Controllers
         {
             return this.View();
         }
+
+        public IActionResult Settings()
+        {
+            return this.View();
+        }
+
+        public IActionResult Days()
+        {
+            return this.View();
+        }
+
+        public IActionResult Money()
+        {
+            return this.View();
+        }
+
+        public IActionResult Parameters()
+        {
+            return this.View();
+        }
+
+        public IActionResult Products()
+        {
+            return this.View();
+        }
+
+        public IActionResult Signin()
+        {
+            return this.View();
+        }
+
+        public IActionResult Signup()
+        {
+            return this.View();
+        }
+
+        public IActionResult recipe()
+        {
+            return this.View();
+        }
     }
 }

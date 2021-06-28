@@ -32,12 +32,17 @@
 
                 <div class="menu-right d-flex justify-content-between">
                     <div class="menu-user">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                        <a asp-area="" asp-controller="Account" asp-action="Login">@User.Identity.Name </a>
-                        }
+                        <a asp-area="" asp-controller="Account" asp-action="Login">Sign Up</a>
                         <a asp-area="" asp-controller="Account" asp-action="RegisterEmail">Register</a>
-                        <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        <a asp-area="" asp-controller="Recipes" asp-action="Index">Recipes</a>
+                        <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                        <a asp-area="" asp-controller="ProductSnacks" asp-action="Index">Product-Snack</a>
+                        <a asp-area="" asp-controller="Mockups" asp-action="Index">Mockups</a>
+
+                        @if (User.IsInRole(ApplicationRoles.Administrators))
+                        {
+
+                        }
                     </div>
                 </div>
 
@@ -45,7 +50,7 @@
                 <div class="menu-right d-flex justify-content-between">
                     <div class="menu-user">
                         <a class="profile" href="settings.html">
-                            <span>Настройки</span>
+                            <a asp-area="" asp-controller="Settings" asp-action="Index">Настройки</a>
                             <img src="~/img/person.png" alt="person">
                         </a>
                     </div>
