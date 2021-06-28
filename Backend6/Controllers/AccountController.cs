@@ -54,7 +54,7 @@ namespace Rationality.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await this.signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await this.signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation(1, "User logged in.");
@@ -75,25 +75,124 @@ namespace Rationality.Controllers
             return this.View(model);
         }
 
-        // GET: /Account/Register
+        // GET: /Account/RegisterEmail
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register(String returnUrl = null)
+        public IActionResult RegisterEmail(String returnUrl = null)
         {
             this.ViewData["ReturnUrl"] = returnUrl;
-            return this.View();
+            return this.View("RegisterEmail");
         }
 
-        // POST: /Account/Register
+        // POST: /Account/RegisterEmail
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, String returnUrl = null)
+        public IActionResult RegisterEmail(RegisterEmailViewModel model, String returnUrl = null)
         {
             this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //var result = await this.userManager.CreateAsync(user, model.Password);
+                //if (result.Succeeded)
+                //{
+                //    await this.signInManager.SignInAsync(user, isPersistent: false);
+                //    this.logger.LogInformation(3, "User created a new account with password.");
+                //    return this.RedirectToLocal(returnUrl);
+                //}
+
+                var bodyParametersViewModel = new RegisterBodyParametersViewModel
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    Password = model.Password
+                };
+
+                return this.View("RegisterBodyParameters", bodyParametersViewModel);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return this.View(model);
+        }
+
+        // GET: /Account/RegisterBodyParameters
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult RegisterBodyParameters(RegisterBodyParametersViewModel model, String returnUrl = null)
+        {
+            this.ViewData["ReturnUrl"] = returnUrl;
+            return this.View("RegisterBodyParameters", model);
+        }
+
+        // POST: /Account/RegisterBodyParameters
+        [HttpPost, ActionName("RegisterBodyParameters")]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public IActionResult RegisterBodyParametersConfirm(RegisterBodyParametersViewModel model, String returnUrl = null)
+        {
+            this.ViewData["ReturnUrl"] = returnUrl;
+            if (this.ModelState.IsValid)
+            {
+                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //var result = await this.userManager.CreateAsync(user, model.Password);
+                //if (result.Succeeded)
+                //{
+                //    await this.signInManager.SignInAsync(user, isPersistent: false);
+                //    this.logger.LogInformation(3, "User created a new account with password.");
+                //    return this.RedirectToLocal(returnUrl);
+                //}
+
+                var moneyViewModel = new RegisterMoneyViewModel
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    Password = model.Password,
+                    Age = model.Age,
+                    Gender = model.Gender,
+                    Weight = model.Weight,
+                    Goal = model.Goal,
+                    Activity = model.Activity,
+                    Height = model.Height
+                };
+
+                return this.View("RegisterMoney", moneyViewModel);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return this.View("RegisterBodyParameters", model);
+        }
+
+        // GET: /Account/RegisterMoney
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult RegisterMoney(RegisterMoneyViewModel model, String returnUrl = null)
+        {
+            this.ViewData["ReturnUrl"] = returnUrl;
+            return this.View("RegisterBodyParameters", model);
+        }
+
+        // POST: /Account/RegisterMoney
+        [HttpPost, ActionName("RegisterMoney")]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterMoneyConfirm(RegisterMoneyViewModel model, String returnUrl = null)
+        {
+            this.ViewData["ReturnUrl"] = returnUrl;
+            if (this.ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Age = model.Age,
+                    Gender = model.Gender,
+                    Weight = model.Weight,
+                    Goal = model.Goal,
+                    Activity = model.Activity,
+                    MoneyPerMonth = model.MoneyPerMonth,
+                    Height = model.Height
+                };
                 var result = await this.userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -101,13 +200,13 @@ namespace Rationality.Controllers
                     this.logger.LogInformation(3, "User created a new account with password.");
                     return this.RedirectToLocal(returnUrl);
                 }
-
-                this.AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return this.View(model);
+            return this.View("RegisterMoney", model);
         }
+
+
 
         // POST: /Account/Logout
         [HttpPost]

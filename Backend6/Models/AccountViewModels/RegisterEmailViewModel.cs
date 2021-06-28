@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Rationality.Models.AccountViewModels
 {
-    public class RegisterViewModel
+    public class RegisterEmailViewModel
     {
+        [Required]
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
