@@ -37,6 +37,8 @@ namespace Rationality
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IUserPermissionsService, UserPermissionsService>();
+            services.AddScoped<INutritionForUserService, NutritionForUserService>();
+            services.AddScoped<IGenerateWeekService, GenerateWeekService>();
 
             services.AddMvc();
         }
