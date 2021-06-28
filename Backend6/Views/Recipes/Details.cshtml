@@ -3,8 +3,60 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h2>Details</h2>
+<form asp-action="Deatail" asp-controller="Recipes">
+    <div class="wrapper">
+        <section class="resipe-page">
+            <div class="container">
+                <div class="res-wrap">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>@Model.Name</h1>
+                            <div class="img-wrap">
+                                <div class="block-img card">
+                                    <div class="card-body">
+                                        <div class="res-img">
+                                            <img src="@Model.Picture " alt="breakfast">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block-cal card">
+                                    <div class="card-body">
+                                        <div class="cal-food-block">
+                                            <h4>Параметры</h4>
+                                        </div>
+                                        <h5>Энергетическая ценность: @Model.Kcal</h5>
+                                        <h5>Белки: @Model.Proteins</h5>
+                                        <h5>Жиры: @Model.Fats</h5>
+                                        <h5>Углеводы: @Model.Carbohydrates</h5>
+                                        <h5>Стоимость: @Model.Price</h5>
+                                    </div>
+                                </div>
+                                <div class="block-food card">
+                                    <div class="card-body">
+                                        <div class="up-food-block">
+                                            <h4>Ингредиенты</h4>
+                                        </div>
+                                        @foreach (var item in Model.RecipeProducts)
+                                        {
+                                            <h5>@item.Product.Name @item.Amount@item.Unit</h5>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cook">
+                                <h4>Способ приготовления</h4>
+                                <h6>
+                                    @Model.CookingMethod
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</form>
+@*<h2>Details</h2>
 
 <div>
     <h4>Recipe</h4>
@@ -69,4 +121,4 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@

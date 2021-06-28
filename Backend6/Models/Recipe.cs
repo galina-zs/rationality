@@ -17,6 +17,7 @@ namespace Rationality.Models
         public string Picture { get; set; }
         public string CookingMethod { get; set; }
         public Meal Meal { get; set; }
+        public ICollection<RecipeProduct> RecipeProducts { get; set; }
     }
 
     public enum Meal
