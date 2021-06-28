@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Backend6</title>
+    <title>@ViewData["Title"] - Rationality</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -36,6 +36,8 @@
                     {
                         //<li><a asp-area="" asp-controller="PostCategories" asp-action="Index">Blog Categories</a></li>
                     }
+                    <li><a asp-area="" asp-controller="Products" asp-action="Index">Products</a></li>
+                    <li><a asp-area="" asp-controller="Recipes" asp-action="Index">Recipes</a></li>
                     <li><a asp-area="" asp-controller="Mockups" asp-action="Index">Mockups</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
