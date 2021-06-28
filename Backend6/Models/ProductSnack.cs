@@ -11,6 +11,5 @@ namespace Rationality.Models
         public int ProductId { get; set; }
         public Product Product { get; set; }
         public double Amount { get; set; }
-        public string Picture { get; set; }
     }
 }
