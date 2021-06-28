@@ -11,8 +11,8 @@ using System;
 namespace Rationality.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210628100640_AddDays")]
-    partial class AddDays
+    [Migration("20210628182447_RecipeProducts")]
+    partial class RecipeProducts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -194,40 +194,6 @@ namespace Rationality.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Rationality.Models.Day", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ApplicationUserId");
-
-                    b.Property<string>("ApplicationUserId1");
-
-                    b.Property<int>("BreakfastId");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int>("DinnerId");
-
-                    b.Property<int>("LunchId");
-
-                    b.Property<int>("SnackId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId1");
-
-                    b.HasIndex("BreakfastId");
-
-                    b.HasIndex("DinnerId");
-
-                    b.HasIndex("LunchId");
-
-                    b.HasIndex("SnackId");
-
-                    b.ToTable("Days");
-                });
-
             modelBuilder.Entity("Rationality.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -252,26 +218,6 @@ namespace Rationality.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Rationality.Models.ProductSnack", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Amount");
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<int?>("SnackId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("SnackId");
-
-                    b.ToTable("ProductSnacks");
                 });
 
             modelBuilder.Entity("Rationality.Models.Recipe", b =>
@@ -378,45 +324,6 @@ namespace Rationality.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Rationality.Models.Day", b =>
-                {
-                    b.HasOne("Rationality.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId1");
-
-                    b.HasOne("Rationality.Models.Recipe", "Breakfast")
-                        .WithMany()
-                        .HasForeignKey("BreakfastId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Rationality.Models.Recipe", "Dinner")
-                        .WithMany()
-                        .HasForeignKey("DinnerId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Rationality.Models.Recipe", "Lunch")
-                        .WithMany()
-                        .HasForeignKey("LunchId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Rationality.Models.Snack", "Snack")
-                        .WithMany()
-                        .HasForeignKey("SnackId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Rationality.Models.ProductSnack", b =>
-                {
-                    b.HasOne("Rationality.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Rationality.Models.Snack")
-                        .WithMany("ProductSnacks")
-                        .HasForeignKey("SnackId");
                 });
 
             modelBuilder.Entity("Rationality.Models.Recipe", b =>

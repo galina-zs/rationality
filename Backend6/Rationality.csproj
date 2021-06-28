@@ -10,6 +10,16 @@
     <Compile Remove="Data\Migrations\20170610191759_AddPosts.Designer.cs" />
     <Compile Remove="Data\Migrations\20170610192257_AddPostAttachments.cs" />
     <Compile Remove="Data\Migrations\20170610192257_AddPostAttachments.Designer.cs" />
+    <Compile Remove="Migrations\20210627144941_AddRecipes.cs" />
+    <Compile Remove="Migrations\20210627144941_AddRecipes.Designer.cs" />
+    <Compile Remove="Migrations\20210627145643_AddRecipeProducts.cs" />
+    <Compile Remove="Migrations\20210627145643_AddRecipeProducts.Designer.cs" />
+    <Compile Remove="Migrations\20210628100413_AddSnacks.cs" />
+    <Compile Remove="Migrations\20210628100413_AddSnacks.Designer.cs" />
+    <Compile Remove="Migrations\20210628100640_AddDays.cs" />
+    <Compile Remove="Migrations\20210628100640_AddDays.Designer.cs" />
+    <Compile Remove="Migrations\20210628182826_AddProductSnacks.cs" />
+    <Compile Remove="Migrations\20210628182826_AddProductSnacks.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\RationalityMockups\signup.cshtml" />

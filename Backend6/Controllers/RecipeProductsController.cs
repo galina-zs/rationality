@@ -13,6 +13,7 @@ namespace Rationality.Controllers
 {
     public class RecipeProductsController : Controller
     {
+        
         private readonly ApplicationDbContext _context;
 
         public RecipeProductsController(ApplicationDbContext context)
@@ -132,5 +133,6 @@ namespace Rationality.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", new { recipeId = recipeId });
         }
+        
     }
 }

@@ -16,6 +16,7 @@ namespace Rationality.Controllers
 {
     public class RecipesController : Controller
     {
+        
         private readonly ApplicationDbContext _context;
         private static readonly HashSet<String> AllowedExtensions = new HashSet<String> { ".jpg", ".jpeg", ".png", ".gif" };
         private readonly IHostingEnvironment hostingEnvironment;
@@ -72,6 +73,7 @@ namespace Rationality.Controllers
 
             if (ModelState.IsValid)
             {
+                
                 var recipe = new Recipe { 
                 Name = model.Name,
                 Kcal = model.Kcal,
@@ -119,7 +121,7 @@ namespace Rationality.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Kcal,Proteins,Fats,Carbohydrates,Price,Picture,CookingMethod,Meal")] Recipe recipe)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Kcal,Proteins,Fats,Carbohydrates,Price,Picture,CookingMethod,Meal")] Product recipe)//Recipe recipe
         {
             if (id != recipe.Id)
             {
@@ -182,5 +184,6 @@ namespace Rationality.Controllers
         {
             return _context.Recipes.Any(e => e.Id == id);
         }
+        
     }
 }

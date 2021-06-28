@@ -14,6 +14,7 @@ namespace Rationality.Controllers
 {
     public class DaysController : Controller
     {
+        
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserPermissionsService userPermissions;
@@ -217,5 +218,6 @@ namespace Rationality.Controllers
         //{
         //    return _context.Days.Any(e => e.Id == id);
         //}
+        
     }
 }

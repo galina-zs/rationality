@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Rationality.Migrations
 {
-    public partial class AddRecipeProducts : Migration
+    public partial class RecipeProducts : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

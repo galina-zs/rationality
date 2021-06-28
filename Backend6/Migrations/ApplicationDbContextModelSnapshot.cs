@@ -260,6 +260,8 @@ namespace Rationality.Migrations
 
                     b.Property<double>("Amount");
 
+                    b.Property<string>("Picture");
+
                     b.Property<int>("ProductId");
 
                     b.Property<int?>("SnackId");
@@ -433,7 +435,7 @@ namespace Rationality.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Rationality.Models.Recipe", "Recipe")
-                        .WithMany()
+                        .WithMany("RecipeProducts")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

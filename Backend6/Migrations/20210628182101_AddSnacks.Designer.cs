@@ -11,7 +11,7 @@ using System;
 namespace Rationality.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210628100413_AddSnacks")]
+    [Migration("20210628182101_AddSnacks")]
     partial class AddSnacks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -220,26 +220,6 @@ namespace Rationality.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Rationality.Models.ProductSnack", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Amount");
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<int?>("SnackId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("SnackId");
-
-                    b.ToTable("ProductSnacks");
-                });
-
             modelBuilder.Entity("Rationality.Models.Recipe", b =>
                 {
                     b.Property<int>("Id")
@@ -270,23 +250,6 @@ namespace Rationality.Migrations
                     b.HasIndex("SnackId");
 
                     b.ToTable("Recipes");
-                });
-
-            modelBuilder.Entity("Rationality.Models.RecipeProduct", b =>
-                {
-                    b.Property<int>("RecipeId");
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<double>("Amount");
-
-                    b.Property<int>("Unit");
-
-                    b.HasKey("RecipeId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("RecipeProducts");
                 });
 
             modelBuilder.Entity("Rationality.Models.Snack", b =>
@@ -346,36 +309,11 @@ namespace Rationality.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Rationality.Models.ProductSnack", b =>
-                {
-                    b.HasOne("Rationality.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Rationality.Models.Snack")
-                        .WithMany("ProductSnacks")
-                        .HasForeignKey("SnackId");
-                });
-
             modelBuilder.Entity("Rationality.Models.Recipe", b =>
                 {
                     b.HasOne("Rationality.Models.Snack")
                         .WithMany("Recipes")
                         .HasForeignKey("SnackId");
-                });
-
-            modelBuilder.Entity("Rationality.Models.RecipeProduct", b =>
-                {
-                    b.HasOne("Rationality.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Rationality.Models.Recipe", "Recipe")
-                        .WithMany()
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
