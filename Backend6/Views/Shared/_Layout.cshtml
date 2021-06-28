@@ -32,6 +32,7 @@
 
                 <div class="menu-right d-flex justify-content-between">
                     <div class="menu-user">
+                        <a asp-area="" asp-controller="Days" asp-action="Index">Days</a>
                         <a asp-area="" asp-controller="Account" asp-action="Login">Sign Up</a>
                         <a asp-area="" asp-controller="Account" asp-action="RegisterEmail">Register</a>
                         @if (User.IsInRole(ApplicationRoles.Administrators))
