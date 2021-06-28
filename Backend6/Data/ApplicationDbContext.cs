@@ -32,7 +32,7 @@ namespace Rationality.Data
             builder.Entity<Day>().HasOne(x => x.Breakfast).WithMany().OnDelete(DeleteBehavior.Restrict);
             builder.Entity<Day>().HasOne(x => x.Lunch).WithMany().OnDelete(DeleteBehavior.Restrict);
             builder.Entity<Day>().HasOne(x => x.Dinner).WithMany().OnDelete(DeleteBehavior.Restrict);
-            // builder.Entity<RecipeProduct>().HasOne(x => x.Product).WithMany().OnDelete(DeleteBehavior.Restrict);
+           // builder.Entity<RecipeProduct>().HasOne(x => x.Product).WithMany().OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

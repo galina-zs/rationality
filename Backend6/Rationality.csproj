@@ -10,18 +10,6 @@
     <Compile Remove="Data\Migrations\20170610191759_AddPosts.Designer.cs" />
     <Compile Remove="Data\Migrations\20170610192257_AddPostAttachments.cs" />
     <Compile Remove="Data\Migrations\20170610192257_AddPostAttachments.Designer.cs" />
-    <Compile Remove="Migrations\20210627142758_AddProductSnacks.cs" />
-    <Compile Remove="Migrations\20210627142758_AddProductSnacks.Designer.cs" />
-    <Compile Remove="Migrations\20210627144941_AddRecipes.cs" />
-    <Compile Remove="Migrations\20210627144941_AddRecipes.Designer.cs" />
-    <Compile Remove="Migrations\20210627145643_AddRecipeProducts.cs" />
-    <Compile Remove="Migrations\20210627145643_AddRecipeProducts.Designer.cs" />
-    <Compile Remove="Migrations\20210627150237_AddSnacks.cs" />
-    <Compile Remove="Migrations\20210627150237_AddSnacks.Designer.cs" />
-    <Compile Remove="Migrations\20210627160133_AddDays.cs" />
-    <Compile Remove="Migrations\20210627160133_AddDays.Designer.cs" />
-    <Compile Remove="Migrations\20210628075925_AddDays.cs" />
-    <Compile Remove="Migrations\20210628075925_AddDays.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.3" />

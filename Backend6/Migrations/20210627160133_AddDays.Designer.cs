@@ -12,14 +12,14 @@ using System;
 namespace Rationality.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210628075541_AddRecipes")]
-    partial class AddRecipes
+    [Migration("20210627160133_AddDays")]
+    partial class AddDays
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -226,7 +226,7 @@ namespace Rationality.Migrations
 
                     b.HasIndex("SnackId");
 
-                    b.ToTable("Day");
+                    b.ToTable("Days");
                 });
 
             modelBuilder.Entity("Rationality.Models.Product", b =>
@@ -261,8 +261,6 @@ namespace Rationality.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<double>("Amount");
-
-                    b.Property<string>("Picture");
 
                     b.Property<int>("ProductId");
 
@@ -309,6 +307,23 @@ namespace Rationality.Migrations
                     b.ToTable("Recipes");
                 });
 
+            modelBuilder.Entity("Rationality.Models.RecipeProduct", b =>
+                {
+                    b.Property<int>("RecipeId");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<double>("Amount");
+
+                    b.Property<int>("Unit");
+
+                    b.HasKey("RecipeId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("RecipeProducts");
+                });
+
             modelBuilder.Entity("Rationality.Models.Snack", b =>
                 {
                     b.Property<int>("Id")
@@ -316,7 +331,7 @@ namespace Rationality.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Snack");
+                    b.ToTable("Snacks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -373,22 +388,22 @@ namespace Rationality.Migrations
                     b.HasOne("Rationality.Models.Recipe", "Breakfast")
                         .WithMany()
                         .HasForeignKey("BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Rationality.Models.Recipe", "Dinner")
                         .WithMany()
                         .HasForeignKey("DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Rationality.Models.Recipe", "Lunch")
                         .WithMany()
                         .HasForeignKey("LunchId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Rationality.Models.Snack", "Snack")
                         .WithMany()
                         .HasForeignKey("SnackId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Rationality.Models.ProductSnack", b =>
@@ -408,6 +423,19 @@ namespace Rationality.Migrations
                     b.HasOne("Rationality.Models.Snack")
                         .WithMany("Recipes")
                         .HasForeignKey("SnackId");
+                });
+
+            modelBuilder.Entity("Rationality.Models.RecipeProduct", b =>
+                {
+                    b.HasOne("Rationality.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Rationality.Models.Recipe", "Recipe")
+                        .WithMany()
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

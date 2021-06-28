@@ -12,14 +12,14 @@ using System;
 namespace Rationality.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210628075648_AddRecipeProducts")]
+    [Migration("20210627145643_AddRecipeProducts")]
     partial class AddRecipeProducts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -195,40 +195,6 @@ namespace Rationality.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Rationality.Models.Day", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ApplicationUserId");
-
-                    b.Property<string>("ApplicationUserId1");
-
-                    b.Property<int>("BreakfastId");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int>("DinnerId");
-
-                    b.Property<int>("LunchId");
-
-                    b.Property<int>("SnackId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId1");
-
-                    b.HasIndex("BreakfastId");
-
-                    b.HasIndex("DinnerId");
-
-                    b.HasIndex("LunchId");
-
-                    b.HasIndex("SnackId");
-
-                    b.ToTable("Day");
-                });
-
             modelBuilder.Entity("Rationality.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -262,17 +228,11 @@ namespace Rationality.Migrations
 
                     b.Property<double>("Amount");
 
-                    b.Property<string>("Picture");
-
                     b.Property<int>("ProductId");
-
-                    b.Property<int?>("SnackId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
-
-                    b.HasIndex("SnackId");
 
                     b.ToTable("ProductSnacks");
                 });
@@ -300,11 +260,7 @@ namespace Rationality.Migrations
 
                     b.Property<int>("Proteins");
 
-                    b.Property<int?>("SnackId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SnackId");
 
                     b.ToTable("Recipes");
                 });
@@ -324,16 +280,6 @@ namespace Rationality.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("RecipeProducts");
-                });
-
-            modelBuilder.Entity("Rationality.Models.Snack", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Snack");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -381,50 +327,12 @@ namespace Rationality.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Rationality.Models.Day", b =>
-                {
-                    b.HasOne("Rationality.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Days")
-                        .HasForeignKey("ApplicationUserId1");
-
-                    b.HasOne("Rationality.Models.Recipe", "Breakfast")
-                        .WithMany()
-                        .HasForeignKey("BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Rationality.Models.Recipe", "Dinner")
-                        .WithMany()
-                        .HasForeignKey("DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Rationality.Models.Recipe", "Lunch")
-                        .WithMany()
-                        .HasForeignKey("LunchId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Rationality.Models.Snack", "Snack")
-                        .WithMany()
-                        .HasForeignKey("SnackId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Rationality.Models.ProductSnack", b =>
                 {
                     b.HasOne("Rationality.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Rationality.Models.Snack")
-                        .WithMany("ProductSnacks")
-                        .HasForeignKey("SnackId");
-                });
-
-            modelBuilder.Entity("Rationality.Models.Recipe", b =>
-                {
-                    b.HasOne("Rationality.Models.Snack")
-                        .WithMany("Recipes")
-                        .HasForeignKey("SnackId");
                 });
 
             modelBuilder.Entity("Rationality.Models.RecipeProduct", b =>
