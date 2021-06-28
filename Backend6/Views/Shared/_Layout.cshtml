@@ -48,7 +48,10 @@
                 <div class="menu-right d-flex justify-content-between">
                     <div class="menu-user">
                         <a class="profile" href="settings.html">
-                            <a asp-area="" asp-controller="Settings" asp-action="Index">Настройки</a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a asp-area="" asp-controller="Settings" asp-action="Index">Настройки</a>
+                            }
                             <img src="~/img/person.png" alt="person">
                         </a>
                     </div>

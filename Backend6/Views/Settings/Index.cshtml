@@ -1,1 +1,150 @@
-﻿
+﻿@model Rationality.Models.ViewModels.SettingsViewModel
+@{
+    ViewBag.Title = "Settings";
+}
+
+<div class="wrapper">
+    <section class="self-set">
+        <div class="container">
+            <div class="set-wrap">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="block-title">
+                            <h3>Настройки</h3>
+                        </div>
+                        <div class="ac-wrap">
+                            <div class="block-set card">
+                                <div class="card-body">
+                                    <div class="up-block">
+                                        <h4>Аккаунт</h4>
+                                        <a href="#popup">Изменить</a>
+                                    </div>
+                                    <h5>Email:   <i>@Model.Email</i></h5>
+                                    <h5><u>Пароль</u></h5>
+                                </div>
+                            </div>
+                            <div class="block-set card">
+                                <div class="card-body">
+                                    <div class="up-block">
+                                        <h4>Характеристики</h4>
+                                        <a href="#popup-two">Изменить</a>
+                                    </div>
+                                    <h5>Возраст:   <i>@Model.Age</i></h5>
+                                    <h5>Пол:   <i>@Model.Gender</i></h5>
+                                    <h5>Вес:   <i>@Model.Weight</i></h5>
+                                    <h5>Рост:   <i>@Model.Height см</i></h5>
+                                    <h5>Цель:   <i>@Model.Goal</i></h5>
+                                    <h5>Уровень физ.нагрузки:   <i>@Model.PhysicalActivity</i></h5>
+                                    <h5>Бюджет на неделю:   <i> @Model.MoneyPerWeek рублей</i></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="popup" class="popup">
+        <a href="#header" class="popup-area"></a>
+        <div class="popup-body">
+            <div class="popup-content">
+                <a href="#header" class="popup-close"></a>
+                <div class="popup-title">
+                    <h5><b>Настройки аккаунта</b></h5>
+                </div>
+                <div class="popup-text">
+                    <b>Имя</b>
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" aria-label="First name">
+                        </div>
+                    </div>
+                    <b>Email</b>
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <input type="email" class="form-control" id="inputEmail3">
+                        </div>
+                    </div>
+                    <b>Придумайте новый пароль</b>
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <input type="password" class="form-control" id="inputPassword3">
+                        </div>
+                    </div>
+                    <b>Повторите пароль</b>
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <input type="password" class="form-control" id="inputPassword3">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="location.href='#header'" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                        <button type="button" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="popup-two" class="popup-two">
+        <a href="#header" class="popup-area-two"></a>
+        <div class="popup-body-two">
+            <div class="popup-content-two">
+                <form asp-action="UpdateInfo">
+                    <a href="#header" class="popup-close"></a>
+                    <div class="popup-title-two">
+                        <h5><b>Настройки характеристик</b></h5>
+                    </div>
+                    <div class="popup-text-two">
+                        <b>Возраст</b>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <input asp-for="Age" class="form-control" />
+                            </div>
+                        </div>
+                        <b>Пол</b>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+                            </div>
+                        </div>
+                        <b>Вес</b>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <input asp-for="Weight" class="form-control" />
+                            </div>
+                        </div>
+
+                        <b>Рост</b>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <input asp-for="Height" class="form-control" />
+                            </div>
+                        </div>
+                        <b>Цель</b>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <select asp-for="Goal" asp-items="Html.GetEnumSelectList<Goal>()"></select>
+                            </div>
+                        </div>
+                        <b>Уровень физ.активности</b>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <select asp-for="PhysicalActivity" asp-items="Html.GetEnumSelectList<PhysicalActivity>()"></select>
+                            </div>
+                        </div>
+                        <b>Бюджет на неделю</b>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <input asp-for="MoneyPerWeek" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button onclick="location.href='#header'" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                            <button type="submit" value="UpdateInfo" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </div>
+                </form>           
+            </div>
+        </div>
+    </div>
+</div>

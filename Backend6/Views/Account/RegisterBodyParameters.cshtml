@@ -25,7 +25,6 @@
                 <div class="card-body">
                     <form class="inp-three" asp-controller="Account" asp-action="RegisterBodyParameters" asp-route-returnurl="@ViewData[" ReturnUrl"]" method="post">
                         @*<div asp-validation-summary="All" class="text-danger"></div>*@
-                        <input type="hidden" asp-for="@Model.UserName" />
                         <input type="hidden" asp-for="@Model.Email" />
                         <input type="hidden" asp-for="@Model.Password" />
                         <b>Сколько Вам лет?</b>
