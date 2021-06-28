@@ -88,20 +88,10 @@ namespace Rationality.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult RegisterEmail(RegisterEmailViewModel model, String returnUrl = null)
+        public IActionResult RegisterEmail(RegisterEmailViewModel model)
         {
-            this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
-                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                //var result = await this.userManager.CreateAsync(user, model.Password);
-                //if (result.Succeeded)
-                //{
-                //    await this.signInManager.SignInAsync(user, isPersistent: false);
-                //    this.logger.LogInformation(3, "User created a new account with password.");
-                //    return this.RedirectToLocal(returnUrl);
-                //}
-
                 var bodyParametersViewModel = new RegisterBodyParametersViewModel
                 {
                     UserName = model.UserName,
@@ -119,9 +109,11 @@ namespace Rationality.Controllers
         // GET: /Account/RegisterBodyParameters
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult RegisterBodyParameters(RegisterBodyParametersViewModel model, String returnUrl = null)
+        public IActionResult RegisterBodyParameters(RegisterBodyParametersViewModel model)
         {
-            this.ViewData["ReturnUrl"] = returnUrl;
+            this.ViewBag.Gender = Enum.GetValues(typeof(Gender));
+            this.ViewBag.Activity = Enum.GetValues(typeof(PhysicalActivity));
+            this.ViewBag.Goal = Enum.GetValues(typeof(Goal));
             return this.View("RegisterBodyParameters", model);
         }
 
@@ -129,20 +121,10 @@ namespace Rationality.Controllers
         [HttpPost, ActionName("RegisterBodyParameters")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult RegisterBodyParametersConfirm(RegisterBodyParametersViewModel model, String returnUrl = null)
+        public IActionResult RegisterBodyParametersConfirm(RegisterBodyParametersViewModel model)
         {
-            this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
-                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                //var result = await this.userManager.CreateAsync(user, model.Password);
-                //if (result.Succeeded)
-                //{
-                //    await this.signInManager.SignInAsync(user, isPersistent: false);
-                //    this.logger.LogInformation(3, "User created a new account with password.");
-                //    return this.RedirectToLocal(returnUrl);
-                //}
-
                 var moneyViewModel = new RegisterMoneyViewModel
                 {
                     UserName = model.UserName,
@@ -166,9 +148,8 @@ namespace Rationality.Controllers
         // GET: /Account/RegisterMoney
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult RegisterMoney(RegisterMoneyViewModel model, String returnUrl = null)
+        public IActionResult RegisterMoney(RegisterMoneyViewModel model)
         {
-            this.ViewData["ReturnUrl"] = returnUrl;
             return this.View("RegisterBodyParameters", model);
         }
 
@@ -176,9 +157,8 @@ namespace Rationality.Controllers
         [HttpPost, ActionName("RegisterMoney")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterMoneyConfirm(RegisterMoneyViewModel model, String returnUrl = null)
+        public async Task<IActionResult> RegisterMoneyConfirm(RegisterMoneyViewModel model)
         {
-            this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -194,12 +174,15 @@ namespace Rationality.Controllers
                     Height = model.Height
                 };
                 var result = await this.userManager.CreateAsync(user, model.Password);
+                var res = await this.signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: false);
+                return this.RedirectToAction("Index", "Mockups");
                 if (result.Succeeded)
                 {
                     await this.signInManager.SignInAsync(user, isPersistent: false);
                     this.logger.LogInformation(3, "User created a new account with password.");
-                    return this.RedirectToLocal(returnUrl);
+                    return this.RedirectToAction("Index", "Mockups");
                 }
+                this.AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form

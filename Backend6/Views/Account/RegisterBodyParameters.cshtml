@@ -19,49 +19,67 @@
 
 <body background="img/back.png" style="background-size: 100%">
 
-<section class="sign-up">
-    <div class="sign-up-block">
-        <div class="card">
-            <div class="card-body">
-                <form class="inp-two" asp-controller="Account" asp-action="RegisterBodyParameters" asp-route-returnurl="@ViewData[" ReturnUrl"]" method="post">
-                    <div asp-validation-summary="All" class="text-danger"></div>
-                    <b>Как Вас зовут?</b>
-                    <div class="row mb-3">
-                        @*<label asp-for="UserName" class="col-md-2 control-label"></label>*@
-                        <div class="col-sm-10">
-                            <input asp-for="UserName" type="text" class="form-control" aria-label="First name" placeholder="Андрей Лаптандер">
-                            <span asp-validation-for="UserName" class="text-danger"></span>
+    <section class="parameters">
+        <div class="parameters-block">
+            <div class="card">
+                <div class="card-body">
+                    <form class="inp-three" asp-controller="Account" asp-action="RegisterBodyParameters" asp-route-returnurl="@ViewData[" ReturnUrl"]" method="post">
+                        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+                        <input type="hidden" asp-for="@Model.UserName" />
+                        <input type="hidden" asp-for="@Model.Email" />
+                        <input type="hidden" asp-for="@Model.Password" />
+                        <b>Сколько Вам лет?</b>
+                        <div class="row mb-3">
+                            <div class="col-md-10">
+                                <input asp-for="Age" type="text" class="form-control" placeholder="16">
+                                @*<span asp-validation-for="Age" class="text-danger"></span>*@
+                            </div>
                         </div>
-                    </div>
-                    <b>Ваш Email</b>
-                    <div class="row mb-3">
-                        <div class="col-sm-10">
-                            <input asp-for="Email" type="email" class="form-control" id="inputEmail3" placeholder="your@email.ru">
-                            <span asp-validation-for="Email" class="text-danger"></span>
+                        <b>Ваш пол</b>
+                        <div class="row mb-3">
+                            <div class="col-md-10">
+                                <select asp-for="Gender" id="inputState" class="form-select" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+                                @*<select asp-for="Gender" id="inputState" class="form-select">
+                                    <option selected>Женский</option>
+                                    <option>Мужской</option>
+                                </select>*@
+                            </div>
                         </div>
-                    </div>
-                    <b>Придумайте пароль</b>
-                    <div class="row mb-3">
-                        <div class="col-sm-10">
-                            <input asp-for="Password" type="password" class="form-control" id="inputPassword3">
-                            <span asp-validation-for="Password" class="text-danger"></span>
+                        <b>Ваш вес (в килограммах)</b>
+                        <div class="row mb-3">
+                            <div class="col-md-10">
+                                <input asp-for="Weight" type="text" class="form-control" placeholder="70">
+                                @*<span asp-validation-for="Weight" class="text-danger"></span>*@
+                            </div>
                         </div>
-                    </div>
-                    <b>Повторите пароль</b>
-                    <div class="row mb-3">
-                        <div class="col-sm-10">
-                            <input asp-for="ConfirmPassword" type="password" class="form-control" id="inputPassword3">
-                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+                        <b>Ваш рост (в сантиметрах)</b>
+                        <div class="row mb-3">
+                            <div class="col-md-10">
+                                <input asp-for="Height" type="text" class="form-control" placeholder="160">
+                                @*<span asp-validation-for="Height" class="text-danger"></span>*@
+                            </div>
                         </div>
-                    </div>
-                    <div class="cont-two">
-                        <button type="submit" class="click btn btn-primary">Продолжить</button>
-                    </div>
-                </form>
+                        <b>Ваша цель</b>
+                        <div class="row mb-3">
+                            <div class="col-md-10">
+                                <select asp-for="Goal" id="inputState" class="form-select" asp-items="Html.GetEnumSelectList<Goal>()"></select>
+                            </div>
+                        </div>
+                        <b>Ваш уровень физической активности</b>
+                        <div class="row mb-3">
+                            <div class="col-md-10">
+                                <select asp-for="Activity" id="inputState" class="form-select" asp-items="Html.GetEnumSelectList<PhysicalActivity>()"></select>
+                            </div>
+                        </div>
+                        <div class="cont-two">
+                            <button @*asp-action="RegisterBodyParameters"*@ type="submit" class="click btn btn-primary">Продолжить</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 </body>
 
 </html>

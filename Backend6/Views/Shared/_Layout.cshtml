@@ -32,7 +32,12 @@
 
                 <div class="menu-right d-flex justify-content-between">
                     <div class="menu-user">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                        <a asp-area="" asp-controller="Account" asp-action="Login">@User.Identity.Name </a>
+                        }
                         <a asp-area="" asp-controller="Account" asp-action="RegisterEmail">Register</a>
+                        <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                     </div>
                 </div>
 
@@ -79,7 +84,6 @@
         </nav>*@
     <div class="container body-content">
         @RenderBody()
-        <hr />
     </div>
     <footer>
         <div class="container">
