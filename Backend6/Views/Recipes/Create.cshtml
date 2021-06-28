@@ -55,7 +55,7 @@
             <div class="form-group">
                 <label asp-for="Meal" class="control-label"></label>
                 <select asp-for="Meal" class="form-control"></select>
-                <span asp-validation-for="Meal" class="text-danger"></span>
+                <select asp-for="Meal" asp-items="Html.GetEnumSelectList<Meal>()"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
