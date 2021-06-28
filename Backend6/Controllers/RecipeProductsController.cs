@@ -64,7 +64,10 @@ namespace Rationality.Controllers
             }
 
             this.ViewBag.Recipe = recipe;
-            this.ViewData["ProductId"] = new SelectList(this._context.Products, "Id", "Name");
+            this.ViewData["ProductId"] = new SelectList(
+                this._context.Products
+                .Where(x => x.IsSnack == false),
+                "Id", "Name");
             return this.View(new RecipeProductsCreateModel());
         }
 
@@ -87,15 +90,25 @@ namespace Rationality.Controllers
             {
                 return this.NotFound();
             }
-
+            var product = await _context.Products
+                    .SingleOrDefaultAsync(x => x.Id == model.ProductId);
             if (ModelState.IsValid)
             {
                 var recipeProduct = new RecipeProduct { 
                     ProductId = model.ProductId,
                     RecipeId = recipe.Id,
-                    Unit = model.Unit,
+                    Unit = product.Unit,
                     Amount = model.Amount
                 };
+
+
+                recipe.Kcal += product.Kcal * (int)model.Amount;
+                recipe.Proteins += product.Proteins * (int)model.Amount;
+                recipe.Fats += product.Fats * (int)model.Amount;
+                recipe.Carbohydrates += product.Carbohydrates * (int)model.Amount;
+                recipe.Price += product.Price * model.Amount;
+                _context.Update(recipe);
+
                 _context.Add(recipeProduct);
                 await _context.SaveChangesAsync();
                 return this.RedirectToAction("Index", new { recipeId = recipe.Id });
@@ -128,9 +141,22 @@ namespace Rationality.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int? recipeId, int? productId)
         {
-            var recipeProduct = await _context.RecipeProducts.SingleOrDefaultAsync(m => m.RecipeId == recipeId && m.ProductId == productId);
+            var recipeProduct = await _context.RecipeProducts.SingleOrDefaultAsync(m => m.RecipeId == recipeId && m.ProductId == productId);            
+
+            var recipe = await this._context.Recipes
+                .SingleOrDefaultAsync(x => x.Id == recipeId);
+            var product = await _context.Products
+                    .SingleOrDefaultAsync(x => x.Id == productId);
+            recipe.Kcal -= product.Kcal * (int)recipeProduct.Amount;
+            recipe.Proteins -= product.Proteins * (int)recipeProduct.Amount;
+            recipe.Fats -= product.Fats * (int)recipeProduct.Amount;
+            recipe.Carbohydrates -= product.Carbohydrates * (int)recipeProduct.Amount;
+            recipe.Price -= product.Price * recipeProduct.Amount;
+            _context.Update(recipe);
+
             _context.RecipeProducts.Remove(recipeProduct);
             await _context.SaveChangesAsync();
+
             return RedirectToAction("Index", new { recipeId = recipeId });
         }
         

@@ -30,7 +30,10 @@ namespace Rationality.Controllers
         // GET: ProductSnacks/Create
         public IActionResult Create()
         {
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name");
+            ViewData["ProductId"] = new SelectList(
+                _context.Products
+                .Where(x => x.IsSnack == true), 
+                "Id", "Name");
             return View();
         }
 
@@ -43,6 +46,7 @@ namespace Rationality.Controllers
         {
             if (ModelState.IsValid)
             {
+    
                 _context.Add(productSnack);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

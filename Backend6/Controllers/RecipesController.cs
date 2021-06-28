@@ -42,13 +42,24 @@ namespace Rationality.Controllers
             }
 
             var recipe = await _context.Recipes
+                .Include(d => d.RecipeProducts)
                 .SingleOrDefaultAsync(m => m.Id == id);
+
+            var products = await _context.RecipeProducts
+                .Include(h => h.Recipe)
+                .Include(h => h.Product)
+                .Where(x => x.RecipeId == recipe.Id)
+                .ToListAsync();
             if (recipe == null)
             {
                 return NotFound();
             }
-
-            return View(recipe);
+            var model = new RecipeDetailsViewModel
+            {
+                Recipe = recipe,
+                RecipeProducts = products
+                };
+            return View(model);
         }
 
         // GET: Recipes/Create

@@ -1,4 +1,4 @@
-﻿@model Rationality.Models.Recipe
+﻿@model Rationality.Models.ViewModels.RecipeDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,12 +10,12 @@
                 <div class="res-wrap">
                     <div class="card">
                         <div class="card-body">
-                            <h1>@Model.Name</h1>
+                            <h1>@Model.Recipe.Name</h1>
                             <div class="img-wrap">
                                 <div class="block-img card">
                                     <div class="card-body">
                                         <div class="res-img">
-                                            <img src="@Model.Picture " alt="breakfast">
+                                            <img src="@Model.Recipe.Picture " alt="breakfast">
                                         </div>
                                     </div>
                                 </div>
@@ -24,11 +24,11 @@
                                         <div class="cal-food-block">
                                             <h4>Параметры</h4>
                                         </div>
-                                        <h5>Энергетическая ценность: @Model.Kcal</h5>
-                                        <h5>Белки: @Model.Proteins</h5>
-                                        <h5>Жиры: @Model.Fats</h5>
-                                        <h5>Углеводы: @Model.Carbohydrates</h5>
-                                        <h5>Стоимость: @Model.Price</h5>
+                                        <h5>Энергетическая ценность: @Model.Recipe.Kcal</h5>
+                                        <h5>Белки: @Model.Recipe.Proteins</h5>
+                                        <h5>Жиры: @Model.Recipe.Fats</h5>
+                                        <h5>Углеводы: @Model.Recipe.Carbohydrates</h5>
+                                        <h5>Стоимость: @Model.Recipe.Price</h5>
                                     </div>
                                 </div>
                                 <div class="block-food card">
@@ -36,9 +36,12 @@
                                         <div class="up-food-block">
                                             <h4>Ингредиенты</h4>
                                         </div>
+                                        @if (Model.RecipeProducts != null)
+                                        {
                                         @foreach (var item in Model.RecipeProducts)
                                         {
                                             <h5>@item.Product.Name @item.Amount@item.Unit</h5>
+                                        }
                                         }
                                     </div>
                                 </div>
@@ -46,7 +49,7 @@
                             <div class="cook">
                                 <h4>Способ приготовления</h4>
                                 <h6>
-                                    @Model.CookingMethod
+                                    @Model.Recipe.CookingMethod
                                 </h6>
                             </div>
                         </div>
