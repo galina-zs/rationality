@@ -34,14 +34,12 @@
                     <div class="menu-user">
                         <a asp-area="" asp-controller="Account" asp-action="Login">Sign Up</a>
                         <a asp-area="" asp-controller="Account" asp-action="RegisterEmail">Register</a>
-                        <a asp-area="" asp-controller="Recipes" asp-action="Index">Recipes</a>
-                        <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
-                        <a asp-area="" asp-controller="ProductSnacks" asp-action="Index">Product-Snack</a>
-                        <a asp-area="" asp-controller="Mockups" asp-action="Index">Mockups</a>
-
                         @if (User.IsInRole(ApplicationRoles.Administrators))
                         {
-
+                            <a asp-area="" asp-controller="Recipes" asp-action="Index">Recipes</a>
+                            <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                            <a asp-area="" asp-controller="ProductSnacks" asp-action="Index">Product-Snack</a>
+                            <a asp-area="" asp-controller="Mockups" asp-action="Index">Mockups</a>
                         }
                     </div>
                 </div>
