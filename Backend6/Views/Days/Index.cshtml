@@ -3,63 +3,159 @@
 @{
     ViewData["Title"] = "Index";
 }
+<form asp-action="Index" asp-controller="Days">
+    <div class="wrapper">
+        <section class="home-products">
+            <div class="container">
+                @foreach (var item in Model)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="ran-block">
+                                <h1>@item.Date.Day.@item.Date.Month</h1>
+                                <button class="rand-day">
+                                    <a asp-action="Index" asp-controller="Days">Поменять</a>
+                                    <img src="~/img/random.png">
+                                </button>
+                            </div>
+                            <div class="products-wrapper">
+                                <div class="card bg-dark text-white">
+                                    <div class="pr-img">
+                                        <img src="@item.Breakfast.Picture" class="card-img" alt="breakfast">
+                                    </div>
+                                    <div class="card-img-overlay">
+                                        <div class="block-txt-up">
+                                            <h5 class="card-title">Завтрак</h5>
+                                            <a asp-action="Details" asp-controller="Recipes" asp-route-id="@item.BreakfastId">Посмотреть</a>
+                                        </div>
+                                        <div class="block-txt-down">
+                                            <a href="recipe.html" class="card-title">@item.Breakfast.Name</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card bg-dark text-white">
+                                    <div class="pr-img">
+                                        <img src="@item.Lunch.Picture" class="card-img" alt="breakfast">
+                                    </div>
+                                    <div class="card-img-overlay">
+                                        <div class="block-txt-up">
+                                            <h5 class="card-title">Обед</h5>
+                                            <a asp-action="Details" asp-controller="Recipes" asp-route-id="@item.LunchId">Посмотреть</a>
+                                        </div>
+                                        <div class="block-txt-down">
+                                            <a href="" class="card-title">@item.Lunch.Name</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card bg-dark text-white">
+                                    <div class="pr-img">
+                                        <img src="@item.Dinner.Picture" class="card-img" alt="breakfast">
+                                    </div>
+                                    <div class="card-img-overlay">
+                                        <div class="block-txt-up">
+                                            <h5 class="card-title">Ужин</h5>
+                                            <a asp-action="Details" asp-controller="Recipes" asp-route-id="@item.DinnerId">Посмотреть</a>
+                                        </div>
+                                        <div class="block-txt-down">
+                                            <a href="" class="card-title">@item.Dinner.Name</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="block-txt">
+                                        <h5>Перекус</h5>
+                                    </div>
+                                    @foreach (var snack in item.Snack.ProductSnacks)
+                                    {
+                                    <div class="row">
+                                        <div class="sneck-wrapper">
+                                            <div class="sneck card bg-dark text-white">
+                                                <div class="pr-img">
+                                                    @*<img src="@snack.Picture" class="card-img" alt="breakfast">*@
+                                                </div>
+                                                <div class="card-img-overlay">
+                                                    @*<div class="block-txt-up">
+                                                        <a asp-action="Details" asp-controller="ProductSnacks" asp-route-id="@item.Id">Посмотреть</a>
+                                                    </div>*@
+                                                    <div class="block-txt-down">
+                                                        <a href="" class="card-title">@snack.Product.Name @snack.Amount@snack.Product.Unit</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
 
-<h2>Index</h2>
+            </div>
+        </section>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
+    </div>
+</form>
+
+
+@*<h2>Index</h2>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ApplicationUserId)
+                    </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Date)
+                    @Html.DisplayNameFor(model => model.Breakfast)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ApplicationUserId)
+                    @Html.DisplayNameFor(model => model.Dinner)
                 </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Breakfast)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dinner)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lunch)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Snack)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationUserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Breakfast.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dinner.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lunch.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Snack.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lunch)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Snack)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Breakfast.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dinner.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lunch.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Snack.Id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@
