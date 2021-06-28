@@ -65,8 +65,7 @@ namespace Rationality.Controllers
 
             this.ViewBag.Recipe = recipe;
             this.ViewData["ProductId"] = new SelectList(
-                this._context.Products
-                .Where(x => x.IsSnack == false),
+                this._context.Products,
                 "Id", "Name");
             return this.View(new RecipeProductsCreateModel());
         }
