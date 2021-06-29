@@ -38,7 +38,7 @@ namespace Rationality.Services
         public Day GenerateDay(ApplicationUser user, Nutrition userNutrition)
         {
             
-            int caloriesScatter = 200, fatsScatter = 10, carbohydratesScatter = 15, proteinsScatter = 10;
+            int caloriesScatter = 1000, fatsScatter = 400, carbohydratesScatter = 450, proteinsScatter = 400;
             int mediumPriceForMeal = (user.MoneyPerMonth / 7) / 4;
             var breakfasts = _context.Recipes
                 .Where(m => m.Meal == Meal.Breakfast && m.Price <= mediumPriceForMeal).ToList();
@@ -51,7 +51,7 @@ namespace Rationality.Services
 
             var selections = BrutForceSelections(breakfasts, lunches, dinners);
             selections = GetGoodPriceSelections(selections, user);
-            selections = AddSnacksIfCan(selections, user);
+            //selections = AddSnacksIfCan(selections, user);
             selections = FilterSelectionsOnCalories(selections, userNutrition.Calories, caloriesScatter);
             selections = FilterSelectionsOnPFC(selections, userNutrition, proteinsScatter, fatsScatter, carbohydratesScatter);
 
@@ -171,14 +171,14 @@ namespace Rationality.Services
                 double selectionCalories = 0;
                 foreach(Recipe recipe in selection)
                 {
-                    selectionCalories += recipe.Price;
+                    selectionCalories += recipe.Kcal / 100;
                 }
                 if(selectionCalories > userCalories + caloriesScatter || selectionCalories < userCalories - caloriesScatter)
                 {
                     selection.Clear();
                 }
             }
-            return null;
+            return selections;
         }
 
         private List<List<Recipe>> FilterSelectionsOnPFC(List<List<Recipe>> selections, 
@@ -194,9 +194,9 @@ namespace Rationality.Services
                 double selectionCarbohydrates = 0;
                 foreach (Recipe recipe in selection)
                 {
-                    selectionProteins += recipe.Proteins;
-                    selectionFats += recipe.Fats;
-                    selectionCarbohydrates += recipe.Carbohydrates;
+                    selectionProteins += recipe.Proteins / 100;
+                    selectionFats += recipe.Fats / 100;
+                    selectionCarbohydrates += recipe.Carbohydrates / 100;
                 }
                 if (selectionFats > user.Fats + fatsScatter || selectionFats < user.Fats - fatsScatter)
                 {
