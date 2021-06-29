@@ -17,8 +17,7 @@ namespace Rationality.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Amount = table.Column<double>(nullable: false),
                     Picture = table.Column<string>(nullable: true),
-                    ProductId = table.Column<int>(nullable: false),
-                    SnackId = table.Column<int>(nullable: true)
+                    ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,23 +28,12 @@ namespace Rationality.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductSnacks_Snacks_SnackId",
-                        column: x => x.SnackId,
-                        principalTable: "Snacks",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductSnacks_ProductId",
                 table: "ProductSnacks",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductSnacks_SnackId",
-                table: "ProductSnacks",
-                column: "SnackId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

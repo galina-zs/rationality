@@ -14,7 +14,7 @@ namespace Rationality.Controllers
 {
     public class DaysController : Controller
     {
-
+        
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserPermissionsService userPermissions;
@@ -49,7 +49,7 @@ namespace Rationality.Controllers
 
             if (items.Result == null)
             {
-                generateWeekService.GenerateWeek(user, nutritionForUserService.GetNutritionForUser(user));
+                generateWeekService.GenerateDay(user, nutritionForUserService.GetNutritionForUser(user));
             }
 
             items = _context.Days
@@ -73,5 +73,6 @@ namespace Rationality.Controllers
 
 
         }
+        
     }
 }

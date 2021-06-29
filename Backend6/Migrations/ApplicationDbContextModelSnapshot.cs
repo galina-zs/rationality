@@ -198,7 +198,7 @@ namespace Rationality.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ApplicationUserId");
+                    b.Property<Guid>("ApplicationUserId");
 
                     b.Property<string>("ApplicationUserId1");
 
@@ -264,13 +264,9 @@ namespace Rationality.Migrations
 
                     b.Property<int>("ProductId");
 
-                    b.Property<int?>("SnackId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
-
-                    b.HasIndex("SnackId");
 
                     b.ToTable("ProductSnacks");
                 });
@@ -414,10 +410,6 @@ namespace Rationality.Migrations
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Rationality.Models.Snack")
-                        .WithMany("ProductSnacks")
-                        .HasForeignKey("SnackId");
                 });
 
             modelBuilder.Entity("Rationality.Models.Recipe", b =>
