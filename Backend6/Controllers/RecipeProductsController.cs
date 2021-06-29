@@ -100,11 +100,10 @@ namespace Rationality.Controllers
                     Amount = model.Amount
                 };
 
-
-                recipe.Kcal += product.Kcal * (int)model.Amount;
-                recipe.Proteins += product.Proteins * (int)model.Amount;
-                recipe.Fats += product.Fats * (int)model.Amount;
-                recipe.Carbohydrates += product.Carbohydrates * (int)model.Amount;
+                recipe.Kcal += (int)(product.Kcal * model.Amount);
+                recipe.Proteins += (int)(product.Proteins * model.Amount);
+                recipe.Fats += (int)(product.Fats * model.Amount);
+                recipe.Carbohydrates += (int)(product.Carbohydrates * model.Amount);
                 recipe.Price += product.Price * model.Amount;
                 _context.Update(recipe);
 
@@ -146,10 +145,10 @@ namespace Rationality.Controllers
                 .SingleOrDefaultAsync(x => x.Id == recipeId);
             var product = await _context.Products
                     .SingleOrDefaultAsync(x => x.Id == productId);
-            recipe.Kcal -= product.Kcal * (int)recipeProduct.Amount;
-            recipe.Proteins -= product.Proteins * (int)recipeProduct.Amount;
-            recipe.Fats -= product.Fats * (int)recipeProduct.Amount;
-            recipe.Carbohydrates -= product.Carbohydrates * (int)recipeProduct.Amount;
+            recipe.Kcal -= (int)(product.Kcal * recipeProduct.Amount);
+            recipe.Proteins -= (int)(product.Proteins * recipeProduct.Amount);
+            recipe.Fats -= (int)(product.Fats * recipeProduct.Amount);
+            recipe.Carbohydrates -= (int)(product.Carbohydrates  * recipeProduct.Amount);
             recipe.Price -= product.Price * recipeProduct.Amount;
             _context.Update(recipe);
 

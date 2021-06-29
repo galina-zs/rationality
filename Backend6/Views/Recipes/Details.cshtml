@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
-}
+} 
 <form asp-action="Deatail" asp-controller="Recipes">
     <div class="wrapper">
         <section class="resipe-page">
@@ -24,7 +24,7 @@
                                         <div class="cal-food-block">
                                             <h4>Параметры</h4>
                                         </div>
-                                        <h5>Энергетическая ценность: @Model.Recipe.Kcal</h5>
+                                        <h5>Ккал: @Model.Recipe.Kcal</h5>
                                         <h5>Белки: @Model.Recipe.Proteins</h5>
                                         <h5>Жиры: @Model.Recipe.Fats</h5>
                                         <h5>Углеводы: @Model.Recipe.Carbohydrates</h5>
@@ -47,10 +47,10 @@
                                 </div>
                             </div>
                             <div class="cook">
-                                <h4>Способ приготовления</h4>
-                                <h6>
-                                    @Model.Recipe.CookingMethod
-                                </h6>
+                                <h4 >Способ приготовления</h4>
+                                
+                                  <h6>@Model.Recipe.CookingMethod</h6>
+                                
                             </div>
                         </div>
                     </div>
