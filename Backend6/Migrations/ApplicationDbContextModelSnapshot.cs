@@ -198,9 +198,7 @@ namespace Rationality.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("ApplicationUserId");
-
-                    b.Property<string>("ApplicationUserId1");
+                    b.Property<string>("ApplicationUserId");
 
                     b.Property<int>("BreakfastId");
 
@@ -214,7 +212,7 @@ namespace Rationality.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId1");
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("BreakfastId");
 
@@ -385,7 +383,7 @@ namespace Rationality.Migrations
                 {
                     b.HasOne("Rationality.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId1");
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Rationality.Models.Recipe", "Breakfast")
                         .WithMany()

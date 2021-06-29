@@ -9,7 +9,7 @@ namespace Rationality.Models
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public Guid ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public int SnackId { get; set; }
         public Snack Snack { get; set; }

@@ -52,14 +52,6 @@ namespace Rationality.Controllers
                 generateWeekService.GenerateDay(user, nutritionForUserService.GetNutritionForUser(user));
             }
 
-            items = _context.Days
-                .Include(d => d.Breakfast)
-                .Include(d => d.Dinner)
-                .Include(d => d.Lunch)
-                .Include(d => d.Snack)
-                .OrderBy(p => p.Date)
-                .SingleOrDefaultAsync(m => m.ApplicationUserId.ToString() == user.Id);
-
             return View(await items);
         }
 
@@ -67,6 +59,15 @@ namespace Rationality.Controllers
         // POST: Days
         [HttpPost, ActionName("Index")]
         public async Task<IActionResult> IndexRandom()
+        {
+
+            return this.View();
+
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateWeek()
         {
 
             return this.View();

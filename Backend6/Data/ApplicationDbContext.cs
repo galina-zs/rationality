@@ -23,6 +23,7 @@ namespace Rationality.Data
         public DbSet<Day> Days { get; set; }
         public DbSet<ProductSnack> ProductSnacks { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

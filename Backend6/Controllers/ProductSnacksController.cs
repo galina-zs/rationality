@@ -14,6 +14,7 @@ namespace Rationality.Controllers
     public class ProductSnacksController : Controller
     {
         
+        
         private readonly ApplicationDbContext _context;
 
         public ProductSnacksController(ApplicationDbContext context)

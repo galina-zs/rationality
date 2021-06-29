@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Rationality.Migrations
 {
-    public partial class AddDays : Migration
+    public partial class AddDay : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,8 +15,7 @@ namespace Rationality.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationUserId = table.Column<Guid>(nullable: false),
-                    ApplicationUserId1 = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true),
                     BreakfastId = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     DinnerId = table.Column<int>(nullable: false),
@@ -27,8 +26,8 @@ namespace Rationality.Migrations
                 {
                     table.PrimaryKey("PK_Days", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Days_AspNetUsers_ApplicationUserId1",
-                        column: x => x.ApplicationUserId1,
+                        name: "FK_Days_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -59,9 +58,9 @@ namespace Rationality.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Days_ApplicationUserId1",
+                name: "IX_Days_ApplicationUserId",
                 table: "Days",
-                column: "ApplicationUserId1");
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Days_BreakfastId",
