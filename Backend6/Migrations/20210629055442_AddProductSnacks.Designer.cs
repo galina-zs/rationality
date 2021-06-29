@@ -11,7 +11,7 @@ using System;
 namespace Rationality.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210629054117_AddProductSnacks")]
+    [Migration("20210629055442_AddProductSnacks")]
     partial class AddProductSnacks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -265,9 +265,13 @@ namespace Rationality.Migrations
 
                     b.Property<int>("ProductId");
 
+                    b.Property<int?>("SnackId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("SnackId");
 
                     b.ToTable("ProductSnacks");
                 });
@@ -411,6 +415,10 @@ namespace Rationality.Migrations
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Rationality.Models.Snack")
+                        .WithMany("ProductSnacks")
+                        .HasForeignKey("SnackId");
                 });
 
             modelBuilder.Entity("Rationality.Models.Recipe", b =>
