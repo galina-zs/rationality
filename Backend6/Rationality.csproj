@@ -22,8 +22,14 @@
     <Compile Remove="Migrations\20210628182826_AddProductSnacks.Designer.cs" />
     <Compile Remove="Migrations\20210628183824_AddProductSnacks.cs" />
     <Compile Remove="Migrations\20210628183824_AddProductSnacks.Designer.cs" />
+    <Compile Remove="Migrations\20210629053858_AddDays.cs" />
+    <Compile Remove="Migrations\20210629053858_AddDays.Designer.cs" />
     <Compile Remove="Migrations\20210629054117_AddProductSnacks.cs" />
     <Compile Remove="Migrations\20210629054117_AddProductSnacks.Designer.cs" />
+    <Compile Remove="Migrations\20210629055442_AddProductSnacks.cs" />
+    <Compile Remove="Migrations\20210629055442_AddProductSnacks.Designer.cs" />
+    <Compile Remove="Migrations\20210629063451_AddProductSnacks.cs" />
+    <Compile Remove="Migrations\20210629063451_AddProductSnacks.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\RationalityMockups\signup.cshtml" />

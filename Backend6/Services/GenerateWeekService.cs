@@ -11,6 +11,7 @@ namespace Rationality.Services
 {
     public class GenerateWeekService : IGenerateWeekService
     {
+
         private readonly ApplicationDbContext _context;
 
         public GenerateWeekService(ApplicationDbContext context)
@@ -21,11 +22,20 @@ namespace Rationality.Services
         public void GenerateWeek(ApplicationUser user, Nutrition userNutrition)
         {
             Random rnd = new Random();
-
+            for(int i = 0; i < 6; i++)
+            {
+                Nutrition randNutrition = new Nutrition();
+                randNutrition.Calories = userNutrition.Calories + rnd.Next(-50, 50);
+                randNutrition.Fats = userNutrition.Fats + rnd.Next(-10, 10);
+                randNutrition.Proteins = userNutrition.Proteins + rnd.Next(-10, 10);
+                randNutrition.Сarbohydrates = userNutrition.Сarbohydrates + rnd.Next(-10, 10);
+                GenerateDay(user, randNutrition);
+            }
         }
 
         public void GenerateDay(ApplicationUser user, Nutrition userNutrition)
         {
+            
             int caloriesScatter = 200, fatsScatter = 10, carbohydratesScatter = 15, proteinsScatter = 10;
             int mediumPriceForMeal = (user.MoneyPerMonth / 7) / 4;
             var breakfasts = _context.Recipes
@@ -43,7 +53,51 @@ namespace Rationality.Services
             selections = FilterSelectionsOnCalories(selections, userNutrition.Calories, caloriesScatter);
             selections = FilterSelectionsOnPFC(selections, userNutrition, proteinsScatter, fatsScatter, carbohydratesScatter);
 
+            int riseScatter = 200;
+            if(selections.Count == 0)
+            {
+                selections = GetGoodPriceSelections(selections, user);
+                selections = AddSnacksIfCan(selections, user);
+                selections = FilterSelectionsOnCalories(selections, userNutrition.Calories, caloriesScatter + riseScatter);
+                selections = FilterSelectionsOnPFC(selections, userNutrition, proteinsScatter + riseScatter, fatsScatter + riseScatter, carbohydratesScatter + riseScatter);
+            }
 
+            var items = _context.Days
+                .Where(m => m.ApplicationUserId.ToString() == user.Id).ToList();
+
+
+            Random rnd = new Random();
+            DateTime date = new DateTime();
+            date = DateTime.Now;
+            date.AddDays(items.Count);
+
+            List<Recipe> final = selections[rnd.Next(0, selections.Count - 1)];
+            List<Recipe> snack = new List<Recipe>();
+            foreach(Recipe recipe in final)
+            {
+                if(recipe.Meal == Meal.Snack)
+                {
+                    snack.Add(recipe);
+                }
+            }
+            if(snack.Count != 0)
+            {
+
+            }
+
+            var day = new Day
+            {
+                Date = date,
+                ApplicationUserId = user.Id,
+
+            };
+            
+
+        }
+
+        private void CreateSnack()
+        {
+            
         }
 
         private List<List<Recipe>> BrutForceSelections(List<Recipe> breakfasts, List<Recipe> lunches, List<Recipe> dinners)
