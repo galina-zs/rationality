@@ -45,11 +45,11 @@ namespace Rationality.Controllers
                 .Include(d => d.Lunch)
                 .Include(d => d.Snack)
                 .OrderBy(p => p.Date)
-                .SingleOrDefaultAsync(m => m.ApplicationUserId.ToString() == user.Id);
+                .SingleOrDefaultAsync(m => m.ApplicationUserId == user.Id);
 
             if (items.Result == null)
             {
-                generateWeekService.GenerateDay(user, nutritionForUserService.GetNutritionForUser(user));
+                List<Day> week = generateWeekService.GenerateWeek(user, nutritionForUserService.GetNutritionForUser(user));
             }
 
             return View(await items);
