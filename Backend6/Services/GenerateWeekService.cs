@@ -19,21 +19,23 @@ namespace Rationality.Services
             _context = context;
         }
 
-        public void GenerateWeek(ApplicationUser user, Nutrition userNutrition)
+        public List<Day> GenerateWeek(ApplicationUser user, Nutrition userNutrition)
         {
             Random rnd = new Random();
-            for(int i = 0; i < 6; i++)
+            List<Day> days = new List<Day>();
+            for(int i = 0; i < 7; i++)
             {
                 Nutrition randNutrition = new Nutrition();
                 randNutrition.Calories = userNutrition.Calories + rnd.Next(-50, 50);
                 randNutrition.Fats = userNutrition.Fats + rnd.Next(-10, 10);
                 randNutrition.Proteins = userNutrition.Proteins + rnd.Next(-10, 10);
                 randNutrition.Сarbohydrates = userNutrition.Сarbohydrates + rnd.Next(-10, 10);
-                GenerateDay(user, randNutrition);
+                days.Add(GenerateDay(user, randNutrition));
             }
+            return days;
         }
 
-        public void GenerateDay(ApplicationUser user, Nutrition userNutrition)
+        public Day GenerateDay(ApplicationUser user, Nutrition userNutrition)
         {
             
             int caloriesScatter = 200, fatsScatter = 10, carbohydratesScatter = 15, proteinsScatter = 10;
@@ -85,14 +87,15 @@ namespace Rationality.Services
 
             }
 
-            var day = new Day
+            return new Day
             {
                 Date = date,
                 ApplicationUserId = user.Id,
-
+                BreakfastId = final[0].Id,
+                LunchId = final[1].Id,
+                DinnerId = final[2].Id
             };
-            
-
+           
         }
 
         private void CreateSnack()
