@@ -15,7 +15,7 @@ namespace Rationality.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationUserId = table.Column<int>(nullable: false),
+                    ApplicationUserId = table.Column<Guid>(nullable: false),
                     ApplicationUserId1 = table.Column<string>(nullable: true),
                     BreakfastId = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),

@@ -20,6 +20,8 @@
     <Compile Remove="Migrations\20210628100640_AddDays.Designer.cs" />
     <Compile Remove="Migrations\20210628182826_AddProductSnacks.cs" />
     <Compile Remove="Migrations\20210628182826_AddProductSnacks.Designer.cs" />
+    <Compile Remove="Migrations\20210628183824_AddProductSnacks.cs" />
+    <Compile Remove="Migrations\20210628183824_AddProductSnacks.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\RationalityMockups\signup.cshtml" />

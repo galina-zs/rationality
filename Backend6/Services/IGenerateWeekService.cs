@@ -10,5 +10,6 @@ namespace Rationality.Services
     public interface IGenerateWeekService
     {
         void GenerateWeek(ApplicationUser user, Nutrition userNutrition);
+        void GenerateDay(ApplicationUser user, Nutrition userNutrition);
     }
 }

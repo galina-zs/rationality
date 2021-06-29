@@ -10,6 +10,7 @@ using Rationality.Models;
 
 namespace Rationality.Controllers
 {
+
     public class ProductSnacksController : Controller
     {
         
@@ -89,6 +90,7 @@ namespace Rationality.Controllers
         {
             return _context.ProductSnacks.Any(e => e.Id == id);
         }
+        
         
     }
 

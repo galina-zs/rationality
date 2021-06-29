@@ -11,8 +11,8 @@ using System;
 namespace Rationality.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210628182646_AddDays")]
-    partial class AddDays
+    [Migration("20210629054117_AddProductSnacks")]
+    partial class AddProductSnacks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -199,7 +199,7 @@ namespace Rationality.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ApplicationUserId");
+                    b.Property<Guid>("ApplicationUserId");
 
                     b.Property<string>("ApplicationUserId1");
 
@@ -252,6 +252,24 @@ namespace Rationality.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Rationality.Models.ProductSnack", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("Amount");
+
+                    b.Property<string>("Picture");
+
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductSnacks");
                 });
 
             modelBuilder.Entity("Rationality.Models.Recipe", b =>
@@ -387,6 +405,14 @@ namespace Rationality.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("Rationality.Models.ProductSnack", b =>
+                {
+                    b.HasOne("Rationality.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Rationality.Models.Recipe", b =>
                 {
                     b.HasOne("Rationality.Models.Snack")
@@ -402,7 +428,7 @@ namespace Rationality.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Rationality.Models.Recipe", "Recipe")
-                        .WithMany()
+                        .WithMany("RecipeProducts")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
