@@ -63,7 +63,6 @@ namespace Rationality.Controllers
 
             return this.View();
 
-
         }
 
         [HttpPost]
